@@ -141,13 +141,8 @@ func readPoint(prompt string, reader *bufio.Reader) (*big.Int, *big.Int) {
 	xStr := strings.TrimSpace(coords[0])
 	yStr := strings.TrimSpace(coords[1])
 
-	x, okX := new(big.Int).SetString(xStr, 16)
-	y, okY := new(big.Int).SetString(yStr, 16)
-
-	if !okX || !okY {
-		fmt.Println("Error: Invalid hexadecimal values in point coordinates.")
-		os.Exit(1)
-	}
+	x := ecc.HexToBigInt(xStr)
+	y := ecc.HexToBigInt(yStr)
 
 	return x, y
 }
@@ -183,7 +178,7 @@ func main() {
 	// Calculate k * G
 	resultX, resultY := scalarMultiplication(k, Gx, Gy, a, p, n)
 	if resultX != nil && resultY != nil {
-		fmt.Printf("Result of %s * G:\n x = 0x%x\n y = 0x%x\n\n", k.String(), resultX, resultY)
+		fmt.Printf("Result of %s * G:\n x: \"0x%x\",\n y: \"0x%x\",\n\n", k.String(), resultX, resultY)
 	} else {
 		fmt.Printf("Result of %s * G is the point at infinity.\n", k.String())
 	}

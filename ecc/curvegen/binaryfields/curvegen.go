@@ -64,26 +64,26 @@ func polyMod(x, irreduciblePoly *big.Int) *big.Int {
 // polyInv calculates the modular multiplicative inverse of a polynomial modulo the irreducible polynomial.
 // This is done using the Extended Euclidean Algorithm for polynomials over GF(2).
 func polyInv(poly, irreduciblePoly *big.Int) *big.Int {
-	a := new(big.Int).Set(poly)
-	b := new(big.Int).Set(irreduciblePoly)
-	x0 := new(big.Int).SetInt64(1)
-	x1 := new(big.Int).SetInt64(0)
+	a := new(big.Int).Set(irreduciblePoly)
+	b := new(big.Int).Set(poly)
+	u := new(big.Int).SetInt64(0)
+	v := new(big.Int).SetInt64(1)
 
-	for a.Cmp(big.NewInt(0)) != 0 && b.Cmp(big.NewInt(0)) != 0 {
-		q, r := polyDivMod(b, a)
-		b.Set(a)
-		a.Set(r)
+	for b.Cmp(big.NewInt(0)) != 0 {
+		q, r := polyDivMod(a, b)
+		a.Set(b)
+		b.Set(r)
 
-		temp := new(big.Int).Set(x1)
-		x1.Xor(x0, polyMul(q, x1))
-		x0.Set(temp)
+		v_temp := new(big.Int).Set(v)
+		v = polyAdd(u, polyMul(q, v))
+		u.Set(v_temp)
 	}
 
-	if b.Cmp(big.NewInt(1)) != 0 {
+	if a.Cmp(big.NewInt(1)) != 0 {
 		return nil
 	}
 
-	return x1
+	return u
 }
 
 // pointDoublingGF2m performs point doubling on an elliptic curve over a binary field.
@@ -110,10 +110,9 @@ func pointDoublingGF2m(x1, y1, a, irreduciblePoly *big.Int) (*big.Int, *big.Int)
 	x2 = polyAdd(x2, a)
 	x2 = polyMod(x2, irreduciblePoly)
 
-	// y2 = lambda*(x1 + x2) + x2 + y1
-	y1_add_x1 := polyAdd(y1, x1)
-	y2 := polyMul(lambda, polyAdd(x1, x2))
-	y2 = polyAdd(y2, y1_add_x1)
+	// y2 = x1^2 + (lambda + 1) * x2
+	x1_sq := polyMul(x1, x1)
+	y2 := polyAdd(x1_sq, polyMul(polyAdd(lambda, big.NewInt(1)), x2))
 	y2 = polyMod(y2, irreduciblePoly)
 
 	return x2, y2
@@ -272,7 +271,7 @@ func main() {
 	// Calculate k * G
 	resultX, resultY := scalarMultiplication(k, Gx, Gy, a, irreduciblePoly, n)
 	if resultX != nil && resultY != nil {
-		fmt.Printf("Result of %s * G:\n x = 0x%x\n y = 0x%x\n\n", k.String(), resultX, resultY)
+		fmt.Printf("Result of %s * G:\n x: \"0x%x\",\n y: \"0x%x\",\n\n", k.String(), resultX, resultY)
 	} else {
 		fmt.Printf("Result of %s * G is the point at infinity.\n", k.String())
 	}
