@@ -37,10 +37,10 @@ var (
 	c2pnb368w1 ecc.BinaryCurve
 	c2tnb359v1 ecc.BinaryCurve
 	c2tnb431r1 ecc.BinaryCurve
-	c2onb191v4 ecc.BinaryCurve
-	c2onb191v5 ecc.BinaryCurve
-	c2onb239v4 ecc.BinaryCurve
-	c2onb239v5 ecc.BinaryCurve
+	//c2onb191v4 ecc.BinaryCurve
+	//c2onb191v5 ecc.BinaryCurve
+	//c2onb239v4 ecc.BinaryCurve
+	//c2onb239v5 ecc.BinaryCurve
 )
 
 func initAll() {
@@ -319,55 +319,55 @@ func initAll() {
 		OidVal:  asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 0, 20},
 	}
 
-	c2onb191v4 = &ecc.BinaryCurveParams{
-		Name:    "c2onb191v4",
-		BitSize: 191,
-		F:       ecc.F(191, 190, 188, 184, 176, 160, 128, 64, 63, 62, 60, 56, 48, 32, 0),
-		A:       ecc.HexToBigInt("0x65903E04E1E4924253E26A3C9AC28C758BD8184A3FB680E8"),
-		B:       ecc.HexToBigInt("0x54678621B190CFCE282ADE219D5B3A065E3F4B3FFDEBB29B"),
-		Gx:      ecc.HexToBigInt("0x025A2C69A32E8638E51CCEFAAD05350A978457CB5FB6DF994A"),
-		Gy:      ecc.HexToBigInt(""),
-		N:       ecc.HexToBigInt("0x4000000000000000000000009CF2D6E3901DAC4C32EEC65D"),
-		H:       0x2,
-		OidVal:  asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 0, 8},
-	}
-
-	c2onb191v5 = &ecc.BinaryCurveParams{
-		Name:    "c2onb191v5",
-		BitSize: 191,
-		F:       ecc.F(191, 190, 188, 184, 176, 160, 128, 64, 63, 62, 60, 56, 48, 32, 0),
-		A:       ecc.HexToBigInt("0x25F8D06C97C822536D469CD5170CDD7BB9F500BD6DB110FB"),
-		B:       ecc.HexToBigInt("0x75FF570E35CA94FB3780C2619D081C17AA59FBD5E591C1C4"),
-		Gx:      ecc.HexToBigInt("0x032A16910E8F6C4B199BE24213857ABC9C992EDFB2471F3C68"),
-		Gy:      ecc.HexToBigInt(""),
-		N:       ecc.HexToBigInt("0x0FFFFFFFFFFFFFFFFFFFFFFFEEB354B7270B2992B7818627"),
-		H:       0x8,
-		OidVal:  asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 0, 9},
-	}
-
-	c2onb239v4 = &ecc.BinaryCurveParams{
-		Name:    "c2onb239v4",
-		BitSize: 239,
-		F:       ecc.F(239, 238, 236, 232, 224, 208, 207, 206, 204, 200, 192, 144, 143, 142, 140, 136, 128, 16, 15, 14, 12, 8, 0),
-		A:       ecc.HexToBigInt("0x182DD45F5D470239B8983FEA47B8B292641C57F9BF84BAECDE8BB3ADCE30"),
-		B:       ecc.HexToBigInt("0x147A9C1D4C2CE9BE5D34EC02797F76667EBAD5A3F93FA2A524BFDE91EF28"),
-		Gx:      ecc.HexToBigInt("0x034912AD657F1D1C6B32EDB9942C95E226B06FB012CD40FDEA0D72197C8104"),
-		Gy:      ecc.HexToBigInt(""),
-		N:       ecc.HexToBigInt("0x200000000000000000000000000000474F7E69F42FE430931D0B455AAE8B"),
-		H:       0x04,
-		OidVal:  asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 0, 14},
-	}
-
-	c2onb239v5 = &ecc.BinaryCurveParams{
-		Name:    "c2onb239v5",
-		BitSize: 239,
-		F:       ecc.F(239, 238, 236, 232, 224, 208, 207, 206, 204, 200, 192, 144, 143, 142, 140, 136, 128, 16, 15, 14, 12, 8, 0),
-		A:       ecc.HexToBigInt("0x1ECF1B9D28D8017505E17475D3DF2982E243CA5CB5E9F94A3F36124A486E"),
-		B:       ecc.HexToBigInt("0x3EE257250D1A2E66CEF23AA0F25B12388DE8A10FF9554F90AFBAA9A08B6D"),
-		Gx:      ecc.HexToBigInt("0x02193279FC543E9F5F7119189785B9C60B249BE4820BAF6C24BDFA2813F8B8"),
-		Gy:      ecc.HexToBigInt(""),
-		N:       ecc.HexToBigInt("0x1555555555555555555555555555558CF77A5D0589D2A9340D963B7AD703"),
-		H:       0x06,
-		OidVal:  asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 0, 15},
-	}
+	//c2onb191v4 = &ecc.BinaryCurveParams{
+	//	Name:    "c2onb191v4",
+	//	BitSize: 191,
+	//	F:       ecc.F(191, 190, 188, 184, 176, 160, 128, 64, 63, 62, 60, 56, 48, 32, 0),
+	//	A:       ecc.HexToBigInt("0x65903E04E1E4924253E26A3C9AC28C758BD8184A3FB680E8"),
+	//	B:       ecc.HexToBigInt("0x54678621B190CFCE282ADE219D5B3A065E3F4B3FFDEBB29B"),
+	//	Gx:      ecc.HexToBigInt("0x025A2C69A32E8638E51CCEFAAD05350A978457CB5FB6DF994A"),
+	//	Gy:      ecc.HexToBigInt(""),
+	//	N:       ecc.HexToBigInt("0x4000000000000000000000009CF2D6E3901DAC4C32EEC65D"),
+	//	H:       0x2,
+	//	OidVal:  asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 0, 8},
+	//}
+	//
+	//c2onb191v5 = &ecc.BinaryCurveParams{
+	//	Name:    "c2onb191v5",
+	//	BitSize: 191,
+	//	F:       ecc.F(191, 190, 188, 184, 176, 160, 128, 64, 63, 62, 60, 56, 48, 32, 0),
+	//	A:       ecc.HexToBigInt("0x25F8D06C97C822536D469CD5170CDD7BB9F500BD6DB110FB"),
+	//	B:       ecc.HexToBigInt("0x75FF570E35CA94FB3780C2619D081C17AA59FBD5E591C1C4"),
+	//	Gx:      ecc.HexToBigInt("0x032A16910E8F6C4B199BE24213857ABC9C992EDFB2471F3C68"),
+	//	Gy:      ecc.HexToBigInt(""),
+	//	N:       ecc.HexToBigInt("0x0FFFFFFFFFFFFFFFFFFFFFFFEEB354B7270B2992B7818627"),
+	//	H:       0x8,
+	//	OidVal:  asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 0, 9},
+	//}
+	//
+	//c2onb239v4 = &ecc.BinaryCurveParams{
+	//	Name:    "c2onb239v4",
+	//	BitSize: 239,
+	//	F:       ecc.F(239, 238, 236, 232, 224, 208, 207, 206, 204, 200, 192, 144, 143, 142, 140, 136, 128, 16, 15, 14, 12, 8, 0),
+	//	A:       ecc.HexToBigInt("0x182DD45F5D470239B8983FEA47B8B292641C57F9BF84BAECDE8BB3ADCE30"),
+	//	B:       ecc.HexToBigInt("0x147A9C1D4C2CE9BE5D34EC02797F76667EBAD5A3F93FA2A524BFDE91EF28"),
+	//	Gx:      ecc.HexToBigInt("0x034912AD657F1D1C6B32EDB9942C95E226B06FB012CD40FDEA0D72197C8104"),
+	//	Gy:      ecc.HexToBigInt(""),
+	//	N:       ecc.HexToBigInt("0x200000000000000000000000000000474F7E69F42FE430931D0B455AAE8B"),
+	//	H:       0x04,
+	//	OidVal:  asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 0, 14},
+	//}
+	//
+	//c2onb239v5 = &ecc.BinaryCurveParams{
+	//	Name:    "c2onb239v5",
+	//	BitSize: 239,
+	//	F:       ecc.F(239, 238, 236, 232, 224, 208, 207, 206, 204, 200, 192, 144, 143, 142, 140, 136, 128, 16, 15, 14, 12, 8, 0),
+	//	A:       ecc.HexToBigInt("0x1ECF1B9D28D8017505E17475D3DF2982E243CA5CB5E9F94A3F36124A486E"),
+	//	B:       ecc.HexToBigInt("0x3EE257250D1A2E66CEF23AA0F25B12388DE8A10FF9554F90AFBAA9A08B6D"),
+	//	Gx:      ecc.HexToBigInt("0x02193279FC543E9F5F7119189785B9C60B249BE4820BAF6C24BDFA2813F8B8"),
+	//	Gy:      ecc.HexToBigInt(""),
+	//	N:       ecc.HexToBigInt("0x1555555555555555555555555555558CF77A5D0589D2A9340D963B7AD703"),
+	//	H:       0x06,
+	//	OidVal:  asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 0, 15},
+	//}
 }

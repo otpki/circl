@@ -121,22 +121,22 @@ func C2tnb431r1() ecc.BinaryCurve {
 	return c2tnb431r1
 }
 
-func C2onb191v4() ecc.BinaryCurve {
-	initonce.Do(initAll)
-	return c2onb191v4
-}
-
-func C2onb191v5() ecc.BinaryCurve {
-	initonce.Do(initAll)
-	return c2onb191v5
-}
-
-func C2onb239v4() ecc.BinaryCurve {
-	initonce.Do(initAll)
-	return c2onb239v4
-}
-
-func C2onb239v5() ecc.BinaryCurve {
-	initonce.Do(initAll)
-	return c2onb239v5
-}
+//func C2onb191v4() ecc.BinaryCurve {
+//	initonce.Do(initAll)
+//	return c2onb191v4
+//}
+//
+//func C2onb191v5() ecc.BinaryCurve {
+//	initonce.Do(initAll)
+//	return c2onb191v5
+//}
+//
+//func C2onb239v4() ecc.BinaryCurve {
+//	initonce.Do(initAll)
+//	return c2onb239v4
+//}
+//
+//func C2onb239v5() ecc.BinaryCurve {
+//	initonce.Do(initAll)
+//	return c2onb239v5
+//}
