@@ -2,6 +2,7 @@ package brainpool
 
 import (
 	"crypto/elliptic"
+	"encoding/asn1"
 	"math/big"
 )
 
@@ -14,9 +15,10 @@ type rcurve struct {
 	z3      *big.Int
 	zinv2   *big.Int
 	zinv3   *big.Int
+	oid     asn1.ObjectIdentifier
 }
 
-func newrcurve(twisted elliptic.Curve, gx, gy, z *big.Int) *rcurve {
+func newrcurve(name string, twisted elliptic.Curve, gx, gy, z *big.Int, oid asn1.ObjectIdentifier) *rcurve {
 	var curve rcurve
 
 	curve.twisted = twisted
@@ -24,6 +26,7 @@ func newrcurve(twisted elliptic.Curve, gx, gy, z *big.Int) *rcurve {
 	curve.params.B = nil // FIXME: crypto/elliptic assumes A=-3
 	curve.params.Gx = gx
 	curve.params.Gy = gy
+	curve.params.Name = name
 
 	two := big.NewInt(2)
 	three := big.NewInt(3)
@@ -34,6 +37,8 @@ func newrcurve(twisted elliptic.Curve, gx, gy, z *big.Int) *rcurve {
 	curve.z3 = new(big.Int).Exp(curve.z, three, curve.params.P)
 	curve.zinv2 = new(big.Int).Exp(curve.zinv, two, curve.params.P)
 	curve.zinv3 = new(big.Int).Exp(curve.zinv, three, curve.params.P)
+
+	curve.oid = oid
 
 	return &curve
 }
@@ -54,6 +59,10 @@ func (curve *rcurve) fromTwisted(tx, ty *big.Int) (*big.Int, *big.Int) {
 	y.Mul(ty, curve.zinv3)
 	y.Mod(&y, curve.params.P)
 	return &x, &y
+}
+
+func (curve *rcurve) Oid() asn1.ObjectIdentifier {
+	return curve.oid
 }
 
 func (curve *rcurve) Params() *elliptic.CurveParams {

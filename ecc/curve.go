@@ -2,6 +2,7 @@ package ecc
 
 import (
 	"crypto/elliptic"
+	"encoding/asn1"
 	"math/big"
 )
 
@@ -9,7 +10,26 @@ import (
 // https://github.com/RyuaNerin/elliptic2
 // https://neuromancer.sk/std/
 
+type Curve interface {
+	elliptic.Curve
+	Oid() asn1.ObjectIdentifier
+}
+
+type BinaryCurve interface {
+	Curve
+	BinaryParams() *BinaryCurveParams
+}
+
+// ensure curve implements the elliptic.Curve interface
+var _ elliptic.Curve = (*CurveParams)(nil)
+var _ elliptic.Curve = (*BinaryCurveParams)(nil)
+
 type CurveParams struct {
+	elliptic.Curve
+	OidVal asn1.ObjectIdentifier
+}
+
+type BinaryCurveParams struct {
 	Name    string
 	BitSize int
 	F       *big.Int // field
@@ -17,43 +37,34 @@ type CurveParams struct {
 	Gx, Gy  *big.Int // generator
 	N       *big.Int // order
 	H       int      // cofactor
+	OidVal  asn1.ObjectIdentifier
 }
 
-type curve struct {
-	params *CurveParams
+func (c *CurveParams) Oid() asn1.ObjectIdentifier {
+	return c.OidVal
 }
 
-type Curve interface {
-	elliptic.Curve
-	BinaryParams() *CurveParams
+func (b *BinaryCurveParams) Oid() asn1.ObjectIdentifier {
+	return b.OidVal
 }
 
-func NewCurve(params *CurveParams) Curve {
-	return &curve{
-		params: params,
-	}
-}
-
-// ensure curve implements the elliptic.Curve interface
-var _ elliptic.Curve = (*curve)(nil)
-
-func (c *curve) Params() *elliptic.CurveParams {
+func (b *BinaryCurveParams) Params() *elliptic.CurveParams {
 	return &elliptic.CurveParams{
-		P:       c.params.F,
-		N:       c.params.N,
-		B:       c.params.B,
-		Gx:      c.params.Gx,
-		Gy:      c.params.Gy,
-		BitSize: c.params.BitSize,
-		Name:    c.params.Name,
+		P:       b.F,
+		N:       b.N,
+		B:       b.B,
+		Gx:      b.Gx,
+		Gy:      b.Gy,
+		BitSize: b.BitSize,
+		Name:    b.Name,
 	}
 }
 
-func (c *curve) BinaryParams() *CurveParams {
-	return c.params
+func (b *BinaryCurveParams) BinaryParams() *BinaryCurveParams {
+	return b
 }
 
-func (c *curve) IsOnCurve(x_, y_ *big.Int) bool {
+func (b *BinaryCurveParams) IsOnCurve(x_, y_ *big.Int) bool {
 	// https://gist.github.com/kurtbrose/4423605#file-elliptic-py-L158-L160
 
 	// yy + xy = xxx + axx + b
@@ -62,7 +73,7 @@ func (c *curve) IsOnCurve(x_, y_ *big.Int) bool {
 
 	tmp := newBFI()
 
-	F := wrapBFI(c.params.F)
+	F := wrapBFI(b.F)
 
 	// ls = yy + xy
 	ls := newBFI()
@@ -75,23 +86,23 @@ func (c *curve) IsOnCurve(x_, y_ *big.Int) bool {
 	xx := newBFI().Mul(x, x)
 
 	rs := newBFI()
-	rs.Mul(x, xx)                    // rs = xxx
-	tmp.Mul(wrapBFI(c.params.A), xx) //            axx
-	rs.Add(rs, tmp)                  // rs = xxx + axx
-	rs.Add(rs, wrapBFI(c.params.B))  // rs = xxx + axx + b
-	rs.Mod(rs, F)                    // rs = rs % f
+	rs.Mul(x, xx)             // rs = xxx
+	tmp.Mul(wrapBFI(b.A), xx) //            axx
+	rs.Add(rs, tmp)           // rs = xxx + axx
+	rs.Add(rs, wrapBFI(b.B))  // rs = xxx + axx + b
+	rs.Mod(rs, F)             // rs = rs % f
 
 	return ls.Cmp(rs) == 0
 }
 
-func (c *curve) Add(x1, y1, x2, y2 *big.Int) (x, y *big.Int) {
+func (b *BinaryCurveParams) Add(x1, y1, x2, y2 *big.Int) (x, y *big.Int) {
 	// https://gist.github.com/kurtbrose/4423605#file-elliptic-py-L37-L45
 
 	x, y = new(big.Int), new(big.Int)
-	return add(x, y, x1, y1, x2, y2, c)
+	return add(x, y, x1, y1, x2, y2, b)
 }
 
-func add(x_, y_, px_, py_, qx_, qy_ *big.Int, c *curve) (*big.Int, *big.Int) {
+func add(x_, y_, px_, py_, qx_, qy_ *big.Int, c *BinaryCurveParams) (*big.Int, *big.Int) {
 	// https://gist.github.com/kurtbrose/4423605#file-elliptic-py-L141-L155
 
 	if px_.Sign() == 0 && py_.Sign() == 0 {
@@ -117,8 +128,8 @@ func add(x_, y_, px_, py_, qx_, qy_ *big.Int, c *curve) (*big.Int, *big.Int) {
 	qx, qy := wrapBFI(qx_), wrapBFI(qy_)
 
 	s := newBFI()
-	f := wrapBFI(c.params.F)
-	a := wrapBFI(c.params.A)
+	f := wrapBFI(c.F)
+	a := wrapBFI(c.A)
 
 	tmp := newBFI()
 
@@ -145,20 +156,20 @@ func add(x_, y_, px_, py_, qx_, qy_ *big.Int, c *curve) (*big.Int, *big.Int) {
 	return x_, y_
 }
 
-func (c *curve) Double(x1, y1 *big.Int) (x, y *big.Int) {
+func (b *BinaryCurveParams) Double(x1, y1 *big.Int) (x, y *big.Int) {
 	x, y = new(big.Int), new(big.Int)
-	return double(x, y, x1, y1, c)
+	return double(x, y, x1, y1, b)
 }
 
-func double(x_, y_, px_, py_ *big.Int, c *curve) (*big.Int, *big.Int) {
+func double(x_, y_, px_, py_ *big.Int, c *BinaryCurveParams) (*big.Int, *big.Int) {
 	// https://gist.github.com/kurtbrose/4423605#file-elliptic-py-L148-L150
 
 	x, y := wrapBFI(x_), wrapBFI(y_)
 	px, py := wrapBFI(px_), wrapBFI(py_)
 
 	s := newBFI()
-	f := wrapBFI(c.params.F)
-	a := wrapBFI(c.params.A)
+	f := wrapBFI(c.F)
+	a := wrapBFI(c.A)
 
 	// s = p.x + _divmod(p.y, p.x, f)
 	s.DivMod(py, px, f) // s =       _divmod(p.y, p.x, f)
@@ -180,7 +191,7 @@ func double(x_, y_, px_, py_ *big.Int, c *curve) (*big.Int, *big.Int) {
 	return x_, y_
 }
 
-func (c *curve) ScalarMult(x1, y1 *big.Int, k []byte) (x, y *big.Int) {
+func (b *BinaryCurveParams) ScalarMult(x1, y1 *big.Int, k []byte) (x, y *big.Int) {
 	// https://gist.github.com/kurtbrose/4423605#file-elliptic-py-L49-L59
 	num := new(big.Int).SetBytes(k)
 
@@ -199,7 +210,7 @@ func (c *curve) ScalarMult(x1, y1 *big.Int, k []byte) (x, y *big.Int) {
 			// acc += doubler
 			tmpX.Set(accX)
 			tmpY.Set(accY)
-			add(accX, accY, tmpX, tmpY, doublerX, doublerY, c)
+			add(accX, accY, tmpX, tmpY, doublerX, doublerY, b)
 		}
 		// num >>= 1
 		num.Rsh(num, 1)
@@ -207,12 +218,12 @@ func (c *curve) ScalarMult(x1, y1 *big.Int, k []byte) (x, y *big.Int) {
 		// doubler += doubler
 		tmpX.Set(doublerX)
 		tmpY.Set(doublerY)
-		double(doublerX, doublerY, tmpX, tmpY, c)
+		double(doublerX, doublerY, tmpX, tmpY, b)
 	}
 
 	return accX, accY
 }
 
-func (c *curve) ScalarBaseMult(k []byte) (x, y *big.Int) {
-	return c.ScalarMult(c.params.Gx, c.params.Gy, k)
+func (b *BinaryCurveParams) ScalarBaseMult(k []byte) (x, y *big.Int) {
+	return b.ScalarMult(b.Gx, b.Gy, k)
 }

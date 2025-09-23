@@ -10,6 +10,7 @@ import (
 	"github.com/cloudflare/circl/ecc"
 	"github.com/cloudflare/circl/ecc/brainpool"
 	"github.com/cloudflare/circl/ecc/nist"
+	"github.com/cloudflare/circl/ecc/secg"
 )
 
 // 3*Basepoint for each curve
@@ -164,6 +165,52 @@ var testvec3G = []struct {
 		x:     "0x72d033e612ca6dd14c28f1f6689af9a97bba7fd88a25bae969dd1c91e75a9f680442dea747eab06e73b746911780505dab0e03149de396b1020fbaf55580cf4d6eb9738ce0d26f8",
 		y:     "0x494ba50070ca0fc97e89f3ea55de5aed4d5bd139b3725618dfeb90152230aa53fa37b6e39baad54a77771f0df01bffee82fbb0bad45f2d5c89f704c6eba6722b1e4433638d87dda",
 	},
+	// -------- SECG --------
+	{
+		curve: secg.Secp192r1(),
+		x:     "0x76e32a2557599e6edcd283201fb2b9aadfd0d359cbb263da",
+		y:     "0x782c37e372ba4520aa62e0fed121d49ef3b543660cfd05fd",
+	},
+	{
+		curve: secg.Secp224r1(),
+		x:     "0xdf1b1d66a551d0d31eff822558b9d2cc75c2180279fe0d08fd896d04",
+		y:     "0xa3f7f03cadd0be444c0aa56830130ddf77d317344e1af3591981a925",
+	},
+	{
+		curve: secg.Secp256r1(),
+		x:     "0x5ecbe4d1a6330a44c8f7ef951d4bf165e6c6b721efada985fb41661bc6e7fd6c",
+		y:     "0x8734640c4998ff7e374b06ce1a64a2ecd82ab036384fb83d9a79b127a27d5032",
+	},
+	{
+		curve: secg.Secp384r1(),
+		x:     "0x77a41d4606ffa1464793c7e5fdc7d98cb9d3910202dcd06bea4f240d3566da6b408bbae5026580d02d7e5c70500c831",
+		y:     "0xc995f7ca0b0c42837d0bbe9602a9fc998520b41c85115aa5f7684c0edc111eacc24abd6be4b5d298b65f28600a2f1df1",
+	},
+	{
+		curve: secg.Secp521r1(),
+		x:     "0x1a73d352443de29195dd91d6a64b5959479b52a6e5b123d9ab9e5ad7a112d7a8dd1ad3f164a3a4832051da6bd16b59fe21baeb490862c32ea05a5919d2ede37ad7d",
+		y:     "0x13e9b03b97dfa62ddd9979f86c6cab814f2f1557fa82a9d0317d2f8ab1fa355ceec2e2dd4cf8dc575b02d5aced1dec3c70cf105c9bc93a590425f588ca1ee86c0e5",
+	},
+
+	//// binary fields
+	//sect113r1 ecc.Curve
+	//sect113r2 ecc.Curve
+	//sect131r1 ecc.Curve
+	//sect131r2 ecc.Curve
+	//sect163k1 ecc.Curve
+	//sect163r1 ecc.Curve
+	//sect163r2 ecc.Curve
+	//sect193r1 ecc.Curve
+	//sect193r2 ecc.Curve
+	//sect233k1 ecc.Curve
+	//sect233r1 ecc.Curve
+	//sect239k1 ecc.Curve
+	//sect283k1 ecc.Curve
+	//sect283r1 ecc.Curve
+	//sect409k1 ecc.Curve
+	//sect409r1 ecc.Curve
+	//sect571k1 ecc.Curve
+	//sect571r1 ecc.Curve
 }
 
 func testDoubleAndAdd(curve elliptic.Curve, x1, y1, ex, ey *big.Int) bool {
@@ -173,7 +220,7 @@ func testDoubleAndAdd(curve elliptic.Curve, x1, y1, ex, ey *big.Int) bool {
 }
 
 func TestDoubleAndAdd(t *testing.T) {
-	for i, tc := range testvec3G {
+	for _, tc := range testvec3G {
 		params := tc.curve.Params()
 		Gx, Gy := params.Gx, params.Gy
 
@@ -181,7 +228,7 @@ func TestDoubleAndAdd(t *testing.T) {
 		Ey := ecc.HexToBigInt(tc.y)
 
 		if !testDoubleAndAdd(tc.curve, Gx, Gy, Ex, Ey) {
-			t.Errorf("%d Add(Double(G), G) != 3G", i)
+			t.Errorf("%s Add(Double(G), G) != 3G", tc.curve.Params().Name)
 		}
 	}
 }
@@ -193,12 +240,12 @@ func testScalarBaseMult(curve elliptic.Curve, k, ex, ey *big.Int) bool {
 
 func TestScalarBaseMult(t *testing.T) {
 	three := big.NewInt(3)
-	for i, tc := range testvec3G {
+	for _, tc := range testvec3G {
 		Ex := ecc.HexToBigInt(tc.x)
 		Ey := ecc.HexToBigInt(tc.y)
 
 		if !testScalarBaseMult(tc.curve, three, Ex, Ey) {
-			t.Errorf("%d ScalarBaseMult(3) != 3G", i)
+			t.Errorf("%s ScalarBaseMult(3) != 3G", tc.curve.Params().Name)
 		}
 	}
 }
@@ -210,14 +257,14 @@ func testScalarMult(curve elliptic.Curve, x1, y1, k, ex, ey *big.Int) bool {
 
 func TestScalarMult(t *testing.T) {
 	three := big.NewInt(3)
-	for i, tc := range testvec3G {
+	for _, tc := range testvec3G {
 		params := tc.curve.Params()
 		Gx, Gy := params.Gx, params.Gy
 		Ex := ecc.HexToBigInt(tc.x)
 		Ey := ecc.HexToBigInt(tc.y)
 
 		if !testScalarMult(tc.curve, Gx, Gy, three, Ex, Ey) {
-			t.Errorf("%d ScalarMult(G, 3) != 3G", i)
+			t.Errorf("%s ScalarMult(G, 3) != 3G", tc.curve.Params().Name)
 		}
 	}
 }
@@ -228,14 +275,14 @@ func TestIsOnCurve(t *testing.T) {
 		Ey := ecc.HexToBigInt(tc.y)
 		ok := tc.curve.IsOnCurve(Ex, Ey)
 		if ok != true {
-			t.Errorf("IsOnCurve(%s, %s) = false", tc.x, tc.y)
+			t.Errorf("%s IsOnCurve(%s, %s) = false", tc.curve.Params().Name, tc.x, tc.y)
 		}
 	}
 }
 
 func TestSign(t *testing.T) {
-	for _, curve := range testvec3G {
-		priv, err := ecdsa.GenerateKey(curve.curve, rand.Reader)
+	for _, tc := range testvec3G {
+		priv, err := ecdsa.GenerateKey(tc.curve, rand.Reader)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -245,7 +292,7 @@ func TestSign(t *testing.T) {
 			t.Fatal(err)
 		}
 		if !ecdsa.Verify(&priv.PublicKey, msg, r, s) {
-			t.Fatal("failed to verify signature")
+			t.Errorf("%s failed to verify signature", tc.curve.Params().Name)
 		}
 	}
 }
