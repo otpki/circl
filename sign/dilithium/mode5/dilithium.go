@@ -8,6 +8,7 @@ package mode5
 
 import (
 	"crypto"
+	"encoding/asn1"
 	"errors"
 	"io"
 
@@ -209,6 +210,9 @@ func (*scheme) SignatureSize() int  { return SignatureSize }
 func (*scheme) SeedSize() int       { return SeedSize }
 
 // TODO TLSIdentifier()
+func (*scheme) Oid() asn1.ObjectIdentifier {
+	return asn1.ObjectIdentifier{1, 3, 6, 1, 4, 1, 2, 267, 12, 8, 7}
+}
 
 func (*scheme) SupportsContext() bool {
 	return false
