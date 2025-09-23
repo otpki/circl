@@ -1,0 +1,90 @@
+package x963
+
+import "crypto/elliptic"
+
+func Ansip224r1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansip224r1
+}
+
+func Ansip384r1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansip384r1
+}
+
+func Ansip521r1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansip521r1
+}
+
+// binary fields
+
+func Ansit163k1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit163k1
+}
+
+func Ansit163r1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit163r1
+}
+
+func Ansit163r2() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit163r2
+}
+
+func Ansit193r1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit193r1
+}
+
+func Ansit193r2() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit193r2
+}
+
+func Ansit233k1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit233k1
+}
+
+func Ansit233r1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit233r1
+}
+
+func Ansit239k1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit239k1
+}
+
+func Ansit283k1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit283k1
+}
+
+func Ansit283r1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit283r1
+}
+
+func Ansit409k1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit409k1
+}
+
+func Ansit409r1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit409r1
+}
+
+func Ansit571k1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit571k1
+}
+
+func Ansit571r1() elliptic.Curve {
+	initonce.Do(initAll)
+	return ansit571r1
+}
