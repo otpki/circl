@@ -7,6 +7,8 @@ import (
 	"errors"
 	"strings"
 
+	"github.com/cloudflare/circl/ecc"
+	"github.com/cloudflare/circl/ecc/curves"
 	"github.com/cloudflare/circl/sign"
 	"github.com/cloudflare/circl/sign/schemes"
 
@@ -17,6 +19,7 @@ import (
 var (
 	allSchemesByOID map[string]sign.Scheme
 	allSchemesByTLS map[uint]sign.Scheme
+	allCurvesByOID  map[string]ecc.Curve
 )
 
 type pkixPrivKey struct {
@@ -28,6 +31,7 @@ type pkixPrivKey struct {
 func init() {
 	allSchemesByOID = make(map[string]sign.Scheme)
 	allSchemesByTLS = make(map[uint]sign.Scheme)
+	allCurvesByOID = make(map[string]ecc.Curve)
 	for _, scheme := range schemes.All() {
 		if cert, ok := scheme.(CertificateScheme); ok {
 			allSchemesByOID[cert.Oid().String()] = scheme
@@ -36,11 +40,16 @@ func init() {
 			allSchemesByTLS[tlsScheme.TLSIdentifier()] = scheme
 		}
 	}
+	for _, curve := range curves.All() {
+		allCurvesByOID[curve.Oid().String()] = curve
+	}
 }
 
 func SchemeByOid(oid asn1.ObjectIdentifier) sign.Scheme { return allSchemesByOID[oid.String()] }
 
 func SchemeByTLSID(id uint) sign.Scheme { return allSchemesByTLS[id] }
+
+func CurveByOid(oid asn1.ObjectIdentifier) ecc.Curve { return allCurvesByOID[oid.String()] }
 
 // Additional methods when the signature scheme is supported in X509.
 type CertificateScheme interface {
