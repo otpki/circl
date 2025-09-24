@@ -266,7 +266,7 @@ func (*scheme) PrivateKeySize() int { return PrivateKeySize }
 func (*scheme) SignatureSize() int  { return SignatureSize }
 func (*scheme) SeedSize() int       { return SeedSize }
 
-// TODO TLSIdentifier()
+func (*scheme) TLSIdentifier() uint {return 0x0904}
 func (*scheme) Oid() asn1.ObjectIdentifier {
 	return asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 4, 3, 17}
 }

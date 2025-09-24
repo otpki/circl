@@ -114,6 +114,39 @@ func (s scheme) UnmarshalBinaryPrivateKey(b []byte) (sign.PrivateKey, error) {
 	return k, nil
 }
 
+func (s scheme) TLSIdentifier() uint {
+	// add the parameter-specific digit based on the ID
+	switch s.ID {
+	case SHA2_128s:
+		return 0x0911
+	case SHA2_128f:
+		return 0x0912
+	case SHA2_192s:
+		return 0x0913
+	case SHA2_192f:
+		return 0x0914
+	case SHA2_256s:
+		return 0x0915
+	case SHA2_256f:
+		return 0x0916
+	case SHAKE_128s:
+		return 0x0917
+	case SHAKE_128f:
+		return 0x0918
+	case SHAKE_192s:
+		return 0x0919
+	case SHAKE_192f:
+		return 0x091A
+	case SHAKE_256s:
+		return 0x091B
+	case SHAKE_256f:
+		return 0x091C
+	default:
+		// for invalid schemes, return 0
+		return 0x0000
+	}
+}
+
 func (s scheme) Oid() asn1.ObjectIdentifier {
 	// https://datatracker.ietf.org/doc/html/rfc9814
 	// base OID for sigAlgs (2.16.840.1.101.3.4.3)
