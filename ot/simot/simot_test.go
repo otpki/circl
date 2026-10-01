@@ -9,7 +9,7 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/cloudflare/circl/group"
+	"github.com/otpki/circl/group"
 )
 
 const testSimOTCount = 100

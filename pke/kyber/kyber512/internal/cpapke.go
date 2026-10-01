@@ -3,9 +3,9 @@ package internal
 import (
 	"bytes"
 
-	"github.com/cloudflare/circl/internal/sha3"
-	"github.com/cloudflare/circl/kem"
-	"github.com/cloudflare/circl/pke/kyber/internal/common"
+	"github.com/otpki/circl/internal/sha3"
+	"github.com/otpki/circl/kem"
+	"github.com/otpki/circl/pke/kyber/internal/common"
 )
 
 // A Kyber.CPAPKE private key.

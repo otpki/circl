@@ -5,7 +5,7 @@ import (
 	"crypto/rand"
 	"fmt"
 
-	"github.com/cloudflare/circl/kem"
+	"github.com/otpki/circl/kem"
 )
 
 type shortKEM struct {

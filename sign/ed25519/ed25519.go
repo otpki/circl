@@ -46,7 +46,7 @@ import (
 	"io"
 	"strconv"
 
-	"github.com/cloudflare/circl/sign"
+	"github.com/otpki/circl/sign"
 )
 
 const (

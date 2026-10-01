@@ -10,7 +10,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/cloudflare/circl/internal/test"
+	"github.com/otpki/circl/internal/test"
 )
 
 func TestInternals(t *testing.T) {

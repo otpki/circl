@@ -10,9 +10,9 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/cloudflare/circl/internal/conv"
-	"github.com/cloudflare/circl/internal/test"
-	"github.com/cloudflare/circl/vdaf/prio3/internal/prio3"
+	"github.com/otpki/circl/internal/conv"
+	"github.com/otpki/circl/internal/test"
+	"github.com/otpki/circl/vdaf/prio3/internal/prio3"
 	"golang.org/x/crypto/cryptobyte"
 )
 

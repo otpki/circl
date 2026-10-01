@@ -11,11 +11,11 @@ import (
 	"hash"
 	"io"
 
-	"github.com/cloudflare/circl/dh/x25519"
-	"github.com/cloudflare/circl/dh/x448"
-	"github.com/cloudflare/circl/kem"
-	"github.com/cloudflare/circl/kem/kyber/kyber768"
-	"github.com/cloudflare/circl/kem/xwing"
+	"github.com/otpki/circl/dh/x25519"
+	"github.com/otpki/circl/dh/x448"
+	"github.com/otpki/circl/kem"
+	"github.com/otpki/circl/kem/kyber/kyber768"
+	"github.com/otpki/circl/kem/xwing"
 	"golang.org/x/crypto/chacha20poly1305"
 	"golang.org/x/crypto/hkdf"
 )

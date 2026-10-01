@@ -4,7 +4,7 @@ package p751
 import (
 	"testing/quick"
 
-	. "github.com/cloudflare/circl/dh/sidh/internal/common"
+	. "github.com/otpki/circl/dh/sidh/internal/common"
 )
 
 var (

@@ -4,8 +4,8 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/cloudflare/circl/internal/sha3"
-	"github.com/cloudflare/circl/simd/keccakf1600"
+	"github.com/otpki/circl/internal/sha3"
+	"github.com/otpki/circl/simd/keccakf1600"
 )
 
 func Example() {

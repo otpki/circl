@@ -1,7 +1,7 @@
 package x962
 
 import (
-	"github.com/cloudflare/circl/ecc"
+	"github.com/otpki/circl/ecc"
 )
 
 func Prime192v1() ecc.Curve {

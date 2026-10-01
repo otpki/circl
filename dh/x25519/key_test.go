@@ -8,7 +8,7 @@ import (
 	"io"
 	"testing"
 
-	"github.com/cloudflare/circl/internal/test"
+	"github.com/otpki/circl/internal/test"
 )
 
 // Indicates whether long tests should be run

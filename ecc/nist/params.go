@@ -5,8 +5,8 @@ import (
 	"encoding/asn1"
 	"sync"
 
-	"github.com/cloudflare/circl/ecc"
-	p384opt "github.com/cloudflare/circl/ecc/p384"
+	"github.com/otpki/circl/ecc"
+	p384opt "github.com/otpki/circl/ecc/p384"
 )
 
 var initonce sync.Once

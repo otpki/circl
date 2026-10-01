@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"io"
 
-	"github.com/cloudflare/circl/group"
+	"github.com/otpki/circl/group"
 )
 
 type PrivateKey struct {

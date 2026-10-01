@@ -1,7 +1,7 @@
 package brainpool
 
 import (
-	"github.com/cloudflare/circl/ecc"
+	"github.com/otpki/circl/ecc"
 )
 
 // https://github.com/ebfe/brainpool/blob/master/curves.go

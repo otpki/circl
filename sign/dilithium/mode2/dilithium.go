@@ -12,9 +12,9 @@ import (
 	"errors"
 	"io"
 
-	"github.com/cloudflare/circl/sign"
-	"github.com/cloudflare/circl/sign/dilithium/mode2/internal"
-	common "github.com/cloudflare/circl/sign/internal/dilithium"
+	"github.com/otpki/circl/sign"
+	"github.com/otpki/circl/sign/dilithium/mode2/internal"
+	common "github.com/otpki/circl/sign/internal/dilithium"
 )
 
 const (

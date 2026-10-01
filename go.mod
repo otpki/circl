@@ -1,4 +1,4 @@
-module github.com/cloudflare/circl
+module github.com/otpki/circl
 
 go 1.22.0
 

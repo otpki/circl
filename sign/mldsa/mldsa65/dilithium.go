@@ -10,9 +10,9 @@ import (
 	"errors"
 	"io"
 
-	"github.com/cloudflare/circl/sign"
-	common "github.com/cloudflare/circl/sign/internal/dilithium"
-	"github.com/cloudflare/circl/sign/mldsa/mldsa65/internal"
+	"github.com/otpki/circl/sign"
+	common "github.com/otpki/circl/sign/internal/dilithium"
+	"github.com/otpki/circl/sign/mldsa/mldsa65/internal"
 )
 
 const (
@@ -266,7 +266,7 @@ func (*scheme) PrivateKeySize() int { return PrivateKeySize }
 func (*scheme) SignatureSize() int  { return SignatureSize }
 func (*scheme) SeedSize() int       { return SeedSize }
 
-func (*scheme) TLSIdentifier() uint {return 0x0905}
+func (*scheme) TLSIdentifier() uint { return 0x0905 }
 func (*scheme) Oid() asn1.ObjectIdentifier {
 	return asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 4, 3, 18}
 }

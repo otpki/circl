@@ -11,9 +11,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cloudflare/circl/internal/nist"
-	"github.com/cloudflare/circl/internal/test"
-	"github.com/cloudflare/circl/kem/schemes"
+	"github.com/otpki/circl/internal/nist"
+	"github.com/otpki/circl/internal/test"
+	"github.com/otpki/circl/kem/schemes"
 )
 
 func TestPQCgenKATKem(t *testing.T) {

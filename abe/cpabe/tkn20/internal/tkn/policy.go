@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	pairing "github.com/cloudflare/circl/ecc/bls12381"
+	pairing "github.com/otpki/circl/ecc/bls12381"
 )
 
 const (

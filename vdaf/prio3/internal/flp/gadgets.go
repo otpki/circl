@@ -1,10 +1,10 @@
 package flp
 
 import (
-	"github.com/cloudflare/circl/vdaf/prio3/arith"
-	"github.com/cloudflare/circl/vdaf/prio3/arith/fp128"
-	"github.com/cloudflare/circl/vdaf/prio3/arith/fp64"
-	"github.com/cloudflare/circl/vdaf/prio3/internal/cursor"
+	"github.com/otpki/circl/vdaf/prio3/arith"
+	"github.com/otpki/circl/vdaf/prio3/arith/fp128"
+	"github.com/otpki/circl/vdaf/prio3/arith/fp64"
+	"github.com/otpki/circl/vdaf/prio3/internal/cursor"
 )
 
 type Gadget[

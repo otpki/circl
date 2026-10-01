@@ -3,9 +3,9 @@ package x963
 import (
 	"sync"
 
-	"github.com/cloudflare/circl/ecc"
-	"github.com/cloudflare/circl/ecc/nist"
-	"github.com/cloudflare/circl/ecc/secg"
+	"github.com/otpki/circl/ecc"
+	"github.com/otpki/circl/ecc/nist"
+	"github.com/otpki/circl/ecc/secg"
 )
 
 var initonce sync.Once

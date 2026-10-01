@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/cloudflare/circl/ecc"
+	"github.com/otpki/circl/ecc"
 )
 
 // The curve equation over a binary field F_2^m is y^2 + xy = x^3 + ax^2 + b.

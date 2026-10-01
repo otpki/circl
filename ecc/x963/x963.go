@@ -1,7 +1,7 @@
 package x963
 
 import (
-	"github.com/cloudflare/circl/ecc"
+	"github.com/otpki/circl/ecc"
 )
 
 func Ansip224r1() ecc.Curve {
