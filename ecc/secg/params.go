@@ -4,8 +4,8 @@ import (
 	"encoding/asn1"
 	"sync"
 
-	"github.com/cloudflare/circl/ecc"
-	"github.com/cloudflare/circl/ecc/nist"
+	"github.com/otpki/circl/ecc"
+	"github.com/otpki/circl/ecc/nist"
 )
 
 var initonce sync.Once

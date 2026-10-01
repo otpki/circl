@@ -3,7 +3,7 @@ package ff
 import (
 	"io"
 
-	"github.com/cloudflare/circl/internal/conv"
+	"github.com/otpki/circl/internal/conv"
 )
 
 // FpSize is the length in bytes of an Fp element.

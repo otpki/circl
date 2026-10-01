@@ -9,8 +9,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/cloudflare/circl/cipher/ascon"
-	"github.com/cloudflare/circl/internal/test"
+	"github.com/otpki/circl/cipher/ascon"
+	"github.com/otpki/circl/internal/test"
 )
 
 type vector struct {

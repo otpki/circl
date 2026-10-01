@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	. "github.com/cloudflare/circl/internal/test"
+	. "github.com/otpki/circl/internal/test"
 )
 
 // Possible values for "Status"

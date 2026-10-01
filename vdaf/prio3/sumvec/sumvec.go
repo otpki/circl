@@ -4,11 +4,11 @@ package sumvec
 import (
 	"errors"
 
-	"github.com/cloudflare/circl/vdaf/prio3/arith"
-	"github.com/cloudflare/circl/vdaf/prio3/arith/fp128"
-	"github.com/cloudflare/circl/vdaf/prio3/internal/cursor"
-	"github.com/cloudflare/circl/vdaf/prio3/internal/flp"
-	"github.com/cloudflare/circl/vdaf/prio3/internal/prio3"
+	"github.com/otpki/circl/vdaf/prio3/arith"
+	"github.com/otpki/circl/vdaf/prio3/arith/fp128"
+	"github.com/otpki/circl/vdaf/prio3/internal/cursor"
+	"github.com/otpki/circl/vdaf/prio3/internal/flp"
+	"github.com/otpki/circl/vdaf/prio3/internal/prio3"
 )
 
 type (

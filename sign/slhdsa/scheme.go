@@ -4,8 +4,8 @@ import (
 	"crypto/rand"
 	"encoding/asn1"
 
-	"github.com/cloudflare/circl/internal/sha3"
-	"github.com/cloudflare/circl/sign"
+	"github.com/otpki/circl/internal/sha3"
+	"github.com/otpki/circl/sign"
 )
 
 func (id ID) Scheme() sign.Scheme { return scheme{id.params()} }

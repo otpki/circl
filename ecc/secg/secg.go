@@ -1,7 +1,7 @@
 package secg
 
 import (
-	"github.com/cloudflare/circl/ecc"
+	"github.com/otpki/circl/ecc"
 )
 
 func Secp192r1() ecc.Curve {

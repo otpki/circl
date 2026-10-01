@@ -1,12 +1,12 @@
 package curves
 
 import (
-	"github.com/cloudflare/circl/ecc"
-	"github.com/cloudflare/circl/ecc/brainpool"
-	"github.com/cloudflare/circl/ecc/nist"
-	"github.com/cloudflare/circl/ecc/secg"
-	"github.com/cloudflare/circl/ecc/x962"
-	"github.com/cloudflare/circl/ecc/x963"
+	"github.com/otpki/circl/ecc"
+	"github.com/otpki/circl/ecc/brainpool"
+	"github.com/otpki/circl/ecc/nist"
+	"github.com/otpki/circl/ecc/secg"
+	"github.com/otpki/circl/ecc/x962"
+	"github.com/otpki/circl/ecc/x963"
 )
 
 // this must be a separate package to avoid circular deps

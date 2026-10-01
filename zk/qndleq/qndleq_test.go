@@ -5,8 +5,8 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/cloudflare/circl/internal/test"
-	"github.com/cloudflare/circl/zk/qndleq"
+	"github.com/otpki/circl/internal/test"
+	"github.com/otpki/circl/zk/qndleq"
 )
 
 func TestProve(t *testing.T) {

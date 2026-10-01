@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/cloudflare/circl/internal/test"
-	"github.com/cloudflare/circl/kem/schemes"
+	"github.com/otpki/circl/internal/test"
+	"github.com/otpki/circl/kem/schemes"
 )
 
 func TestACVP(t *testing.T) {

@@ -54,8 +54,8 @@ import (
 	"io"
 	"math"
 
-	"github.com/cloudflare/circl/group"
-	"github.com/cloudflare/circl/zk/dleq"
+	"github.com/otpki/circl/group"
+	"github.com/otpki/circl/zk/dleq"
 )
 
 const (

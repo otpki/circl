@@ -4,8 +4,8 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/cloudflare/circl/internal/conv"
-	"github.com/cloudflare/circl/internal/test"
+	"github.com/otpki/circl/internal/conv"
+	"github.com/otpki/circl/internal/test"
 )
 
 func TestCalculateS(t *testing.T) {

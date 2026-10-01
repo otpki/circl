@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/cloudflare/circl/internal/test"
-	"github.com/cloudflare/circl/sign/ed25519"
+	"github.com/otpki/circl/internal/test"
+	"github.com/otpki/circl/sign/ed25519"
 )
 
 type group struct {

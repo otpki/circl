@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cloudflare/circl/ecc/bls12381/ff"
-	"github.com/cloudflare/circl/internal/test"
+	"github.com/otpki/circl/ecc/bls12381/ff"
+	"github.com/otpki/circl/internal/test"
 )
 
 type vectorHash struct {

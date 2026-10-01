@@ -5,8 +5,8 @@ import (
 	"flag"
 	"testing"
 
-	"github.com/cloudflare/circl/internal/test"
-	"github.com/cloudflare/circl/math/fp25519"
+	"github.com/otpki/circl/internal/test"
+	"github.com/otpki/circl/math/fp25519"
 )
 
 func randomPoint(P *pointR1) {

@@ -7,8 +7,8 @@ import (
 	"io"
 	"testing"
 
-	"github.com/cloudflare/circl/ecc/fourq"
-	"github.com/cloudflare/circl/internal/test"
+	"github.com/otpki/circl/ecc/fourq"
+	"github.com/otpki/circl/internal/test"
 )
 
 func TestDH(t *testing.T) {

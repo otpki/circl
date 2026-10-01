@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/cloudflare/circl/group"
-	"github.com/cloudflare/circl/internal/test"
-	"github.com/cloudflare/circl/zk/dleq"
+	"github.com/otpki/circl/group"
+	"github.com/otpki/circl/internal/test"
+	"github.com/otpki/circl/zk/dleq"
 )
 
 func TestDLEQ(t *testing.T) {

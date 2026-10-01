@@ -7,10 +7,10 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/cloudflare/circl/ecc"
-	"github.com/cloudflare/circl/ecc/curves"
-	"github.com/cloudflare/circl/sign"
-	"github.com/cloudflare/circl/sign/schemes"
+	"github.com/otpki/circl/ecc"
+	"github.com/otpki/circl/ecc/curves"
+	"github.com/otpki/circl/sign"
+	"github.com/otpki/circl/sign/schemes"
 
 	"golang.org/x/crypto/cryptobyte"
 	casn1 "golang.org/x/crypto/cryptobyte/asn1"

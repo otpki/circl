@@ -5,8 +5,8 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/cloudflare/circl/internal/conv"
-	"github.com/cloudflare/circl/internal/test"
+	"github.com/otpki/circl/internal/conv"
+	"github.com/otpki/circl/internal/test"
 )
 
 func (P *pointR1) random() {

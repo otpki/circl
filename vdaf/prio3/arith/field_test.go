@@ -8,8 +8,8 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/cloudflare/circl/internal/sha3"
-	"github.com/cloudflare/circl/internal/test"
+	"github.com/otpki/circl/internal/sha3"
+	"github.com/otpki/circl/internal/test"
 	"golang.org/x/crypto/cryptobyte"
 )
 
