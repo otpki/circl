@@ -174,6 +174,67 @@ func Verify(pk *PublicKey, msg, sig []byte) bool {
 	)
 }
 
+{{- if .NIST }}
+// SignPreHashTo signs the given pre-hashed message and writes the signature
+// into signature. It will panic if signature is not of length at least
+// SignatureSize.
+//
+// ctx is the optional context string. Errors if ctx is larger than 255 bytes.
+// A nil context string is equivalent to an empty context string.
+func SignPreHashTo(sk *PrivateKey, phMsg, ctx []byte, randomized bool, sig []byte) error {
+	var rnd [32]byte
+	if randomized {
+		_, err := cryptoRand.Read(rnd[:])
+		if err != nil {
+			return err
+		}
+	}
+
+	if len(ctx) > 255 {
+		return sign.ErrContextTooLong
+	}
+
+	internal.SignTo(
+		(*internal.PrivateKey)(sk),
+		func (w io.Writer) {
+			_, _ = w.Write([]byte{1})
+			_, _ = w.Write([]byte{byte(len(ctx))})
+
+			if ctx != nil {
+				_, _ = w.Write(ctx)
+			}
+			w.Write(phMsg)
+		},
+		rnd,
+		sig,
+	)
+	return nil
+}
+
+// VerifyPreHash checks whether the given signature by pk on phMsg is valid.
+//
+// ctx is the optional context string. Fails if ctx is larger than 255 bytes.
+// A nil context string is equivalent to an empty context string.
+func VerifyPreHash(pk *PublicKey, phMsg, ctx, sig []byte) bool {
+	if len(ctx) > 255 {
+		return false
+	}
+	return internal.Verify(
+		(*internal.PublicKey)(pk),
+		func (w io.Writer) {
+			_, _ = w.Write([]byte{1})
+			_, _ = w.Write([]byte{byte(len(ctx))})
+
+			if ctx != nil {
+				_, _ = w.Write(ctx)
+			}
+			_, _ = w.Write(phMsg)
+		},
+		sig,
+	)
+}
+{{- end }}
+
 // Sets pk to the public key encoded in buf.
 func (pk *PublicKey) Unpack(buf *[PublicKeySize]byte) {
 	(*internal.PublicKey)(pk).Unpack(buf)
@@ -313,7 +374,12 @@ func (*scheme) PublicKeySize() int { return PublicKeySize }
 func (*scheme) PrivateKeySize() int { return PrivateKeySize }
 func (*scheme) SignatureSize() int { return SignatureSize }
 func (*scheme) SeedSize() int { return SeedSize }
+{{- if .TLSId }}
+
+func (*scheme) TLSIdentifier() uint { return {{ printf "0x%04x" .TLSId }} }
+{{- else }}
 // TODO TLSIdentifier()
+{{- end }}
 
 {{- if .Oid }}
 func (*scheme) Oid() asn1.ObjectIdentifier {

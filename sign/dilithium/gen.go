@@ -31,6 +31,7 @@ type Mode struct {
 	TRSize        int
 	CTildeSize    int
 	Oid           asn1.ObjectIdentifier
+	TLSId         uint
 }
 
 func (m Mode) Pkg() string {
@@ -133,6 +134,7 @@ var (
 			TRSize:        64,
 			CTildeSize:    32,
 			Oid:           asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 4, 3, 17},
+			TLSId:         0x0904,
 		},
 		{
 			Name:          "ML-DSA-65",
@@ -147,6 +149,7 @@ var (
 			TRSize:        64,
 			CTildeSize:    48,
 			Oid:           asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 4, 3, 18},
+			TLSId:         0x0905,
 		},
 		{
 			Name:          "ML-DSA-87",
@@ -161,6 +164,7 @@ var (
 			TRSize:        64,
 			CTildeSize:    64,
 			Oid:           asn1.ObjectIdentifier{2, 16, 840, 1, 101, 3, 4, 3, 19},
+			TLSId:         0x0906,
 		},
 	}
 	TemplateWarning = "// Code generated from"
