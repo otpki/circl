@@ -31,7 +31,7 @@ linters:
             - $gostd
             - golang.org/x
             - github.com/bwesterb/go-ristretto
-            - github.com/cloudflare/circl
+            - github.com/otpki/circl
     funlen:
       lines: 120
       statements: 80
@@ -53,6 +53,11 @@ linters:
         - -QF1008
   exclusions:
     generated: lax
+    rules:
+      # These two interactive command-line tools deliberately print prompts/results.
+      - path: '^ecc/curvegen/(binaryfields/)?curvegen\.go$'
+        linters:
+          - forbidigo
 issues:
   max-issues-per-linter: 0
   max-same-issues: 0

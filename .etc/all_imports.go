@@ -9,6 +9,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"go/build"
 	"io/fs"
 	"os"
 	"strings"
@@ -37,6 +38,16 @@ func main() {
 				if strings.Contains(path, sd) {
 					return nil
 				}
+			}
+			pkg, err := build.ImportDir(path, 0)
+			if _, ok := err.(*build.NoGoError); ok {
+				return nil
+			}
+			if err != nil {
+				return err
+			}
+			if pkg.Name == "main" {
+				return nil
 			}
 			fmt.Fprintf(f, "import _ \"%v%v\"\n", circl, path)
 		}

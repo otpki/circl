@@ -21,8 +21,10 @@ type BinaryCurve interface {
 }
 
 // ensure curve implements the elliptic.Curve interface
-var _ elliptic.Curve = (*CurveParams)(nil)
-var _ elliptic.Curve = (*BinaryCurveParams)(nil)
+var (
+	_ elliptic.Curve = (*CurveParams)(nil)
+	_ elliptic.Curve = (*BinaryCurveParams)(nil)
+)
 
 type CurveParams struct {
 	elliptic.Curve

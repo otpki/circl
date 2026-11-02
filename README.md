@@ -2,6 +2,11 @@
 
 # CIRCL
 
+This is OTPKI's fork of [Cloudflare CIRCL](https://github.com/cloudflare/circl),
+used by IoGo. It adds elliptic-curve support, curve/OID registry helpers, and
+post-quantum algorithm identifiers. The module path is `github.com/otpki/circl`
+and the development branch is `iogo`. The badges below refer to upstream CIRCL.
+
 [![GitHub release](https://img.shields.io/github/release/cloudflare/circl.svg)](https://GitHub.com/cloudflare/circl/releases/)
 [![CIRCL](https://github.com/cloudflare/circl/workflows/CIRCL/badge.svg)](https://github.com/cloudflare/circl/actions)
 [![GoDoc](https://godoc.org/github.com/cloudflare/circl?status.svg)](https://pkg.go.dev/github.com/cloudflare/circl?tab=overview)
@@ -15,14 +20,14 @@ Curve Cryptography (ECC).
 
 ## Security Disclaimer
 
-🚨 This library is offered as-is, and without a guarantee. Therefore, it is expected that changes in the code, repository, and API occur in the future. We recommend to take caution before using this library in a production application since part of its content is experimental. All security issues must be reported, please notify us immediately following the instructions given in our [Security Policy](https://github.com/cloudflare/circl/security/policy).
+🚨 This library is offered as-is, and without a guarantee. Therefore, it is expected that changes in the code, repository, and API occur in the future. We recommend to take caution before using this library in a production application since part of its content is experimental. All security issues must be reported, please notify us immediately following the instructions given in our [Security Policy](SECURITY.md).
 
 ## Installation
 
 You can get CIRCL by fetching:
 
 ```sh
-go get -u github.com/cloudflare/circl
+go get github.com/otpki/circl@iogo
 ```
 
 Alternatively, look at the [Cloudflare Go](https://github.com/cloudflare/go/tree/cf) fork to see how to integrate CIRCL natively in Go.
@@ -154,9 +159,8 @@ benchmarking:
 
 ## Contributing
 
-To contribute, fork this repository and make your changes, and then make a Pull
-Request. A Pull Request requires approval of the admin team and a successful
-CI build.
+Pull requests to this fork target `iogo`. See [CONTRIBUTING.md](CONTRIBUTING.md)
+for testing requirements and preparing changes for upstream Cloudflare CIRCL.
 
 ## How to Cite
 
