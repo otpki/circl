@@ -313,12 +313,7 @@ func (*scheme) PublicKeySize() int { return PublicKeySize }
 func (*scheme) PrivateKeySize() int { return PrivateKeySize }
 func (*scheme) SignatureSize() int { return SignatureSize }
 func (*scheme) SeedSize() int { return SeedSize }
-{{- if .TLSIdentifier }}
-
-func (*scheme) TLSIdentifier() uint { return {{ printf "0x%04x" .TLSIdentifier }} }
-{{- else }}
 // TODO TLSIdentifier()
-{{- end }}
 
 {{- if .Oid }}
 func (*scheme) Oid() asn1.ObjectIdentifier {
