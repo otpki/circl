@@ -4,9 +4,7 @@ import (
 	"math/big"
 )
 
-var (
-	one = big.NewInt(1)
-)
+var one = big.NewInt(1)
 
 type bfi struct {
 	v *big.Int
@@ -15,12 +13,15 @@ type bfi struct {
 func newBFI() *bfi {
 	return &bfi{new(big.Int)}
 }
+
 func newBFI64(x int64) *bfi {
 	return &bfi{big.NewInt(x)}
 }
+
 func copyBFI(v *big.Int) *bfi {
 	return &bfi{new(big.Int).Set(v)}
 }
+
 func wrapBFI(v *big.Int) *bfi {
 	return &bfi{v}
 }
@@ -47,6 +48,7 @@ func (z *bfi) SetInt(x int64) *bfi {
 func (z *bfi) Clone() *bfi {
 	return copyBFI(z.v)
 }
+
 func (z *bfi) CloneBigInt() *big.Int {
 	return new(big.Int).Set(z.v)
 }
@@ -177,7 +179,7 @@ func bfDiv(a, b *bfi) (*bfi, *bfi) {
 
 		// while r and not sweeper & r:
 		for r.Sign() != 0 && tmp.And(sweeper, r).Sign() == 0 {
-			//sweeper >>= 1
+			// sweeper >>= 1
 			sweeper.Rsh(sweeper, 1)
 			// rlen -= 1
 			rlen--

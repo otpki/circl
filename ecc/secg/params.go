@@ -38,6 +38,7 @@ var (
 	sect571r1 ecc.BinaryCurve
 )
 
+//nolint:funlen // Keep the standardized curve parameter declarations together for review.
 func initAll() {
 	// technically the "name" field is incorrect since it's ambiguous
 	secp192r1 = nist.P192()

@@ -33,6 +33,7 @@ var (
 	p512r1 *rcurve
 )
 
+//nolint:funlen // Keep the standardized curve parameter declarations together for review.
 func initAll() {
 	p160t1 = &ecc.CurveParams{
 		Curve: &elliptic.CurveParams{
@@ -160,5 +161,4 @@ func initAll() {
 	gy, _ = new(big.Int).SetString("7DDE385D566332ECC0EABFA9CF7822FDF209F70024A57B1AA000C55B881F8111B2DCDE494A5F485E5BCA4BD88A2763AED1CA2B2FA8F0540678CD1E0F3AD80892", 16)
 	z, _ = new(big.Int).SetString("12EE58E6764838B69782136F0F2D3BA06E27695716054092E60A80BEDB212B64E585D90BCE13761F85C3F1D2A64E3BE8FEA2220F01EBA5EEB0F35DBD29D922AB", 16)
 	p512r1 = newrcurve("brainpoolP512r1", p512t1, gx, gy, z, asn1.ObjectIdentifier{1, 3, 36, 3, 3, 2, 8, 1, 1, 13})
-
 }

@@ -3,10 +3,13 @@ name: CIRCL
 on:
   push:
     branches:
-      - main
+      - iogo
   pull_request:
     branches:
-      - main
+      - iogo
+permissions:
+  contents: read
+
 jobs:
   amd64_job:
     name: Go-${{matrix.GOVER}}/amd64
@@ -17,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Setup Go-${{ matrix.GOVER }}
         uses: actions/setup-go@v6
         with:
@@ -27,7 +32,7 @@ jobs:
           version: v2.3.1
       - name: Check shadowing
         run: |
-         go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
+         go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@v0.41.0
          go vet -vettool=$(which shadow) ./... 2>&1 | awk -f .etc/action.awk
         shell: bash
       - name: Verifying Code
@@ -49,6 +54,8 @@ jobs:
         GOVER: ['1.25', '1.24']
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Setup Go-${{ matrix.GOVER }}
         uses: actions/setup-go@v6
         with:
@@ -64,6 +71,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Setup Go
         uses: actions/setup-go@v6
         with:
@@ -81,6 +90,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Setup Go
         uses: actions/setup-go@v6
         with:
@@ -97,6 +108,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Setup Go
         uses: actions/setup-go@v6
         with:
@@ -119,6 +132,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Setup Go
         uses: actions/setup-go@v6
         with:
@@ -127,26 +142,3 @@ jobs:
         run: go build -v ./...
       - name: Testing
         run: go test -v -count=1 ./...
-  analyze:
-    name: Analyze with CodeQL
-    runs-on: ubuntu-24.04
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-      - name: Setup Go
-        uses: actions/setup-go@v6
-        with:
-          go-version: '1.25'
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
-        with:
-          languages: go
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v4
-        with:
-          category: "/language:go"

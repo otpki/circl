@@ -37,12 +37,13 @@ var (
 	c2pnb368w1 ecc.BinaryCurve
 	c2tnb359v1 ecc.BinaryCurve
 	c2tnb431r1 ecc.BinaryCurve
-	//c2onb191v4 ecc.BinaryCurve
-	//c2onb191v5 ecc.BinaryCurve
-	//c2onb239v4 ecc.BinaryCurve
-	//c2onb239v5 ecc.BinaryCurve
+	// c2onb191v4 ecc.BinaryCurve
+	// c2onb191v5 ecc.BinaryCurve
+	// c2onb239v4 ecc.BinaryCurve
+	// c2onb239v5 ecc.BinaryCurve
 )
 
+//nolint:funlen // Keep the standardized curve parameter declarations together for review.
 func initAll() {
 	// technically the "name" field is incorrect
 	prime192v1 = nist.P192()

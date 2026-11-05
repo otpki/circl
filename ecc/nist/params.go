@@ -31,6 +31,7 @@ var (
 	b571 ecc.BinaryCurve
 )
 
+//nolint:funlen // Keep the standardized curve parameter declarations together for review.
 func initAll() {
 	p192 = &ecc.CurveParams{
 		Curve: &elliptic.CurveParams{
