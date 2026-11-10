@@ -12,6 +12,7 @@ import (
 	"sync"
 
 	"github.com/cloudflare/circl/ecc"
+	"github.com/cloudflare/circl/internal/ctcurve"
 )
 
 // https://github.com/ebfe/brainpool/blob/master/curves.go
@@ -41,7 +42,7 @@ var (
 //nolint:funlen // Keep the standardized curve parameter declarations together for review.
 func initAll() {
 	p160t1 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("E95E4A5F737059DC60DFC7AD95B3D8139515620F"),
 			N:       ecc.HexToBigInt("E95E4A5F737059DC60DF5991D45029409E60FC09"),
 			B:       ecc.HexToBigInt("7A556B6DAE535B7B51ED2C4D7DAA7A0B5C55F380"),
@@ -49,12 +50,12 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("ADD6718B7C7C1961F0991B842443772152C9E0AD"),
 			BitSize: 160,
 			Name:    "brainpoolP160t1",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 3, 36, 3, 3, 2, 8, 1, 1, 2},
 	}
 
 	p192t1 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("C302F41D932A36CDA7A3463093D18DB78FCE476DE1A86297"),
 			N:       ecc.HexToBigInt("C302F41D932A36CDA7A3462F9E9E916B5BE8F1029AC4ACC1"),
 			B:       ecc.HexToBigInt("13D56FFAEC78681E68F9DEB43B35BEC2FB68542E27897B79"),
@@ -62,12 +63,12 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("97E2C5667C2223A902AB5CA449D0084B7E5B3DE7CCC01C9"),
 			BitSize: 192,
 			Name:    "brainpoolP192t1",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 3, 36, 3, 3, 2, 8, 1, 1, 4},
 	}
 
 	p224t1 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("D7C134AA264366862A18302575D1D787B09F075797DA89F57EC8C0FF"),
 			N:       ecc.HexToBigInt("D7C134AA264366862A18302575D0FB98D116BC4B6DDEBCA3A5A7939F"),
 			B:       ecc.HexToBigInt("4B337D934104CD7BEF271BF60CED1ED20DA14C08B3BB64F18A60888D"),
@@ -75,12 +76,12 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("374E9F5143E568CD23F3F4D7C0D4B1E41C8CC0D1C6ABD5F1A46DB4C"),
 			BitSize: 224,
 			Name:    "brainpoolP224t1",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 3, 36, 3, 3, 2, 8, 1, 1, 6},
 	}
 
 	p256t1 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("A9FB57DBA1EEA9BC3E660A909D838D726E3BF623D52620282013481D1F6E5377"),
 			N:       ecc.HexToBigInt("A9FB57DBA1EEA9BC3E660A909D838D718C397AA3B561A6F7901E0E82974856A7"),
 			B:       ecc.HexToBigInt("662C61C430D84EA4FE66A7733D0B76B7BF93EBC4AF2F49256AE58101FEE92B04"),
@@ -88,12 +89,12 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("2D996C823439C56D7F7B22E14644417E69BCB6DE39D027001DABE8F35B25C9BE"),
 			BitSize: 256,
 			Name:    "brainpoolP256t1",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 3, 36, 3, 3, 2, 8, 1, 1, 8},
 	}
 
 	p320t1 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("D35E472036BC4FB7E13C785ED201E065F98FCFA6F6F40DEF4F92B9EC7893EC28FCD412B1F1B32E27"),
 			N:       ecc.HexToBigInt("D35E472036BC4FB7E13C785ED201E065F98FCFA5B68F12A32D482EC7EE8658E98691555B44C59311"),
 			B:       ecc.HexToBigInt("A7F561E038EB1ED560B3D147DB782013064C19F27ED27C6780AAF77FB8A547CEB5B4FEF422340353"),
@@ -101,12 +102,12 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("63BA3A7A27483EBF6671DBEF7ABB30EBEE084E58A0B077AD42A5A0989D1EE71B1B9BC0455FB0D2C3"),
 			BitSize: 320,
 			Name:    "brainpoolP320t1",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 3, 36, 3, 3, 2, 8, 1, 1, 10},
 	}
 
 	p384t1 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("8CB91E82A3386D280F5D6F7E50E641DF152F7109ED5456B412B1DA197FB71123ACD3A729901D1A71874700133107EC53"),
 			N:       ecc.HexToBigInt("8CB91E82A3386D280F5D6F7E50E641DF152F7109ED5456B31F166E6CAC0425A7CF3AB6AF6B7FC3103B883202E9046565"),
 			B:       ecc.HexToBigInt("7F519EADA7BDA81BD826DBA647910F8C4B9346ED8CCDC64E4B1ABD11756DCE1D2074AA263B88805CED70355A33B471EE"),
@@ -114,12 +115,12 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("25AB056962D30651A114AFD2755AD336747F93475B7A1FCA3B88F2B6A208CCFE469408584DC2B2912675BF5B9E582928"),
 			BitSize: 384,
 			Name:    "brainpoolP384t1",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 3, 36, 3, 3, 2, 8, 1, 1, 12},
 	}
 
 	p512t1 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("AADD9DB8DBE9C48B3FD4E6AE33C9FC07CB308DB3B3C9D20ED6639CCA703308717D4D9B009BC66842AECDA12AE6A380E62881FF2F2D82C68528AA6056583A48F3"),
 			N:       ecc.HexToBigInt("AADD9DB8DBE9C48B3FD4E6AE33C9FC07CB308DB3B3C9D20ED6639CCA70330870553E5C414CA92619418661197FAC10471DB1D381085DDADDB58796829CA90069"),
 			B:       ecc.HexToBigInt("7CBBBCF9441CFAB76E1890E46884EAE321F70C0BCB4981527897504BEC3E36A62BCDFA2304976540F6450085F2DAE145C22553B465763689180EA2571867423E"),
@@ -127,7 +128,7 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("5B534BD595F5AF0FA2C892376C84ACE1BB4E3019B71634C01131159CAE03CEE9D9932184BEEF216BD71DF2DADF86A627306ECFF96DBB8BACE198B61E00F8B332"),
 			BitSize: 512,
 			Name:    "brainpoolP512t1",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 3, 36, 3, 3, 2, 8, 1, 1, 14},
 	}
 

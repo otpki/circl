@@ -22,14 +22,9 @@ Curve Cryptography (ECC).
 
 ### Constant-Time Caveats
 
-⚠️ **Fork-specific warning:** the added binary-curve arithmetic in `ecc/`,
-custom prime curves (including Brainpool and P-192), and interactive tools in
-`ecc/curvegen/` are not constant time. Their branches, loop bounds, and
-`math/big` operations can leak secret values through timing. Do not use these
-implementations with secret scalars, including private keys or signing nonces.
-Curve/OID registration does not imply suitability for cryptographic use or
-modern security strength. This warning does not change the guarantees of the
-existing constant-time implementations to which some curves delegate.
+⚠️ The fork's custom curves use fixed-width arithmetic. For custom-curve ECDSA, use
+[`sign/ecdsa`](sign/ecdsa) because Go's generic signer remains variable time.
+These implementations are experimental and unaudited, see the [ECC package docs](ecc/doc.go) for timing limits.
 
 ⚠️ Not every package in CIRCL is constant time. The following packages document, at the
 top of their `doc.go` or main source file, the specific operations that are known to

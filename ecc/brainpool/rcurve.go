@@ -9,9 +9,12 @@ import (
 	"crypto/elliptic"
 	"encoding/asn1"
 	"math/big"
+
+	"github.com/cloudflare/circl/internal/ctcurve"
 )
 
 type rcurve struct {
+	backend *ctcurve.Curve
 	twisted elliptic.Curve
 	params  elliptic.CurveParams
 	z       *big.Int
@@ -42,6 +45,15 @@ func newrcurve(name string, twisted elliptic.Curve, gx, gy, z *big.Int, oid asn1
 	curve.z3 = new(big.Int).Exp(curve.z, three, curve.params.P)
 	curve.zinv2 = new(big.Int).Exp(curve.zinv, two, curve.params.P)
 	curve.zinv3 = new(big.Int).Exp(curve.zinv, three, curve.params.P)
+
+	// Public coefficients under x_twisted=z²*x and y_twisted=z³*y.
+	a := new(big.Int).Mul(curve.zinv2, curve.zinv2)
+	a.Mul(a, big.NewInt(-3)).Mod(a, curve.params.P)
+	b := new(big.Int).Mul(curve.zinv3, curve.zinv3)
+	b.Mul(b, twisted.Params().B).Mod(b, curve.params.P)
+	backendParams := curve.params
+	backendParams.B = b
+	curve.backend = ctcurve.New(&backendParams, a, false)
 
 	curve.oid = oid
 
@@ -75,24 +87,21 @@ func (curve *rcurve) Params() *elliptic.CurveParams {
 }
 
 func (curve *rcurve) IsOnCurve(x, y *big.Int) bool {
-	return curve.twisted.IsOnCurve(curve.toTwisted(x, y))
+	return curve.backend.IsOnCurve(x, y)
 }
 
 func (curve *rcurve) Add(x1, y1, x2, y2 *big.Int) (x, y *big.Int) {
-	tx1, ty1 := curve.toTwisted(x1, y1)
-	tx2, ty2 := curve.toTwisted(x2, y2)
-	return curve.fromTwisted(curve.twisted.Add(tx1, ty1, tx2, ty2))
+	return curve.backend.Add(x1, y1, x2, y2)
 }
 
 func (curve *rcurve) Double(x1, y1 *big.Int) (x, y *big.Int) {
-	return curve.fromTwisted(curve.twisted.Double(curve.toTwisted(x1, y1)))
+	return curve.backend.Double(x1, y1)
 }
 
 func (curve *rcurve) ScalarMult(x1, y1 *big.Int, scalar []byte) (x, y *big.Int) {
-	tx1, ty1 := curve.toTwisted(x1, y1)
-	return curve.fromTwisted(curve.twisted.ScalarMult(tx1, ty1, scalar))
+	return curve.backend.ScalarMult(x1, y1, scalar)
 }
 
 func (curve *rcurve) ScalarBaseMult(scalar []byte) (x, y *big.Int) {
-	return curve.fromTwisted(curve.twisted.ScalarBaseMult(scalar))
+	return curve.backend.ScalarBaseMult(scalar)
 }
