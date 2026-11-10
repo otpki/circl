@@ -5,6 +5,11 @@
 // Code generated from pkg.templ.go. DO NOT EDIT.
 
 {{ if .NIST }}
+// Copyright (c) 2026 OmniTrust Security LLC. All rights reserved.
+// OmniTrust Security LLC's additions and modifications are licensed under the
+// Apache License, Version 2.0 (see LICENSE-APACHE).
+// Existing third-party code remains under its original terms (see LICENSE).
+
 // {{.Pkg}} implements NIST signature scheme {{.Name}} as defined in FIPS204.
 {{- else }}
 // {{.Pkg}} implements the CRYSTALS-Dilithium signature scheme {{.Name}}
