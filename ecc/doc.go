@@ -7,10 +7,9 @@
 //
 // # Security
 //
-// BinaryCurveParams operations are not constant time and must not be used with
-// secret scalars, private keys, or signing nonces. The custom prime curves in
-// subpackages, including Brainpool and P-192, also use variable-time arithmetic.
-// Registration of a curve does not imply modern security strength or suitability
-// for secret data. Some curves delegate to existing constant-time implementations;
-// consult the implementation used by the specific curve.
+// Scalar arithmetic is constant time for fixed-length scalars. Curve parameters
+// and affine inputs must be public; big.Int coordinate conversions are variable time.
+// Use sign/ecdsa for custom-curve signing; Go's generic signer remains variable time.
+// These curves are experimental and unaudited, and registration does not imply
+// modern security strength. The curvegen tools are variable-time reference tools.
 package ecc

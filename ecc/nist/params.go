@@ -11,7 +11,7 @@ import (
 	"sync"
 
 	"github.com/cloudflare/circl/ecc"
-	p384opt "github.com/cloudflare/circl/ecc/p384"
+	"github.com/cloudflare/circl/internal/ctcurve"
 )
 
 var initonce sync.Once
@@ -39,7 +39,7 @@ var (
 //nolint:funlen // Keep the standardized curve parameter declarations together for review.
 func initAll() {
 	p192 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("0xfffffffffffffffffffffffffffffffeffffffffffffffff"),
 			N:       ecc.HexToBigInt("0xffffffffffffffffffffffff99def836146bc9b1b4d22831"),
 			B:       ecc.HexToBigInt("0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1"),
@@ -47,7 +47,7 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("0x07192b95ffc8da78631011ed6b24cdd573f977a11e794811"),
 			BitSize: 192,
 			Name:    "P-192",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 1, 1},
 	}
 	p224 = &ecc.CurveParams{
@@ -59,7 +59,7 @@ func initAll() {
 		OidVal: asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 1, 7},
 	}
 	p384 = &ecc.CurveParams{
-		Curve:  p384opt.P384(),
+		Curve:  elliptic.P384(),
 		OidVal: asn1.ObjectIdentifier{1, 3, 132, 0, 34},
 	}
 	p521 = &ecc.CurveParams{

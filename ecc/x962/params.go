@@ -12,6 +12,7 @@ import (
 
 	"github.com/cloudflare/circl/ecc"
 	"github.com/cloudflare/circl/ecc/nist"
+	"github.com/cloudflare/circl/internal/ctcurve"
 )
 
 var initonce sync.Once
@@ -53,7 +54,7 @@ func initAll() {
 	// technically the "name" field is incorrect
 	prime192v1 = nist.P192()
 	prime192v2 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("0xfffffffffffffffffffffffffffffffeffffffffffffffff"),
 			N:       ecc.HexToBigInt("0xfffffffffffffffffffffffe5fb1a724dc80418648d8dd31"),
 			B:       ecc.HexToBigInt("0xcc22d6dfb95c6b25e49c0d6364a4e5980c393aa21668d953"),
@@ -61,11 +62,11 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("0x6574d11d69b6ec7a672bb82a083df2f2b0847de970b2de15"),
 			BitSize: 192,
 			Name:    "prime192v2",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 1, 2},
 	}
 	prime192v3 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("0xfffffffffffffffffffffffffffffffeffffffffffffffff"),
 			N:       ecc.HexToBigInt("0xffffffffffffffffffffffff7a62d031c83f4294f640ec13"),
 			B:       ecc.HexToBigInt("0x22123dc2395a05caa7423daeccc94760a7d462256bd56916"),
@@ -73,12 +74,12 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("0x38a90f22637337334b49dcb66a6dc8f9978aca7648a943b0"),
 			BitSize: 192,
 			Name:    "prime192v3",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 1, 3},
 	}
 
 	prime239v1 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("0x7fffffffffffffffffffffff7fffffffffff8000000000007fffffffffff"),
 			N:       ecc.HexToBigInt("0x7fffffffffffffffffffffff7fffff9e5e9a9f5d9071fbd1522688909d0b"),
 			B:       ecc.HexToBigInt("0x6b016c3bdcf18941d0d654921475ca71a9db2fb27d1d37796185c2942c0a"),
@@ -86,11 +87,11 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("0x7debe8e4e90a5dae6e4054ca530ba04654b36818ce226b39fccb7b02f1ae"),
 			BitSize: 239,
 			Name:    "prime239v1",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 1, 4},
 	}
 	prime239v2 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("0x7fffffffffffffffffffffff7fffffffffff8000000000007fffffffffff"),
 			N:       ecc.HexToBigInt("0x7fffffffffffffffffffffff800000cfa7e8594377d414c03821bc582063"),
 			B:       ecc.HexToBigInt("0x617fab6832576cbbfed50d99f0249c3fee58b94ba0038c7ae84c8c832f2c"),
@@ -98,11 +99,11 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("0x5b0125e4dbea0ec7206da0fc01d9b081329fb555de6ef460237dff8be4ba"),
 			BitSize: 239,
 			Name:    "prime239v2",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 1, 5},
 	}
 	prime239v3 = &ecc.CurveParams{
-		Curve: &elliptic.CurveParams{
+		Curve: ctcurve.NewPrime(&elliptic.CurveParams{
 			P:       ecc.HexToBigInt("0x7fffffffffffffffffffffff7fffffffffff8000000000007fffffffffff"),
 			N:       ecc.HexToBigInt("0x7fffffffffffffffffffffff7fffff975deb41b3a6057c3c432146526551"),
 			B:       ecc.HexToBigInt("0x255705fa2a306654b1f4cb03d6a750a30c250102d4988717d9ba15ab6d3e"),
@@ -110,7 +111,7 @@ func initAll() {
 			Gy:      ecc.HexToBigInt("0x1607e6898f390c06bc1d552bad226f3b6fcfe48b6e818499af18e3ed6cf3"),
 			BitSize: 239,
 			Name:    "prime239v3",
-		},
+		}),
 		OidVal: asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 1, 6},
 	}
 

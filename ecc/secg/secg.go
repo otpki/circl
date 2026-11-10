@@ -5,8 +5,7 @@
 
 // Package secg provides elliptic curves and their object identifiers.
 //
-// Custom curve operations may be variable time and must not be used with secret
-// scalars. See the security documentation in package ecc.
+// Use fixed-length scalars and public affine inputs. See package ecc for timing limits.
 package secg
 
 import (

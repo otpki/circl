@@ -3,6 +3,7 @@
 // Apache License, Version 2.0 (see LICENSE-APACHE).
 // Existing third-party code remains under its original terms (see LICENSE).
 
+// This interactive reference tool is variable time and must not process private keys.
 package main
 
 import (
