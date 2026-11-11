@@ -5,7 +5,7 @@
 // Code generated from pkg.templ.go. DO NOT EDIT.
 
 {{ if .NIST }}
-// Copyright (c) 2026 OmniTrust Security LLC. All rights reserved.
+// Copyright (c) 2026 OmniTrust Security LLC.
 // OmniTrust Security LLC's additions and modifications are licensed under the
 // Apache License, Version 2.0 (see LICENSE-APACHE).
 // Existing third-party code remains under its original terms (see LICENSE).
