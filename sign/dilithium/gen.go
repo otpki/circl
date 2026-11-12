@@ -1,4 +1,4 @@
-// Copyright (c) 2026 OmniTrust Security LLC. All rights reserved.
+// Copyright (c) 2026 OmniTrust Security LLC.
 // OmniTrust Security LLC's additions and modifications are licensed under the
 // Apache License, Version 2.0 (see LICENSE-APACHE).
 // Existing third-party code remains under its original terms (see LICENSE).
@@ -95,6 +95,7 @@ var (
 			Gamma2:        (params.Q - 1) / 88,
 			TRSize:        32,
 			CTildeSize:    32,
+			Oid:           asn1.ObjectIdentifier{1, 3, 6, 1, 4, 1, 2, 267, 12, 4, 4},
 		},
 		{
 			Name:          "Dilithium3",
@@ -108,6 +109,7 @@ var (
 			Gamma2:        (params.Q - 1) / 32,
 			TRSize:        32,
 			CTildeSize:    32,
+			Oid:           asn1.ObjectIdentifier{1, 3, 6, 1, 4, 1, 2, 267, 12, 6, 5},
 		},
 		{
 			Name:          "Dilithium5",
@@ -121,6 +123,7 @@ var (
 			Gamma2:        (params.Q - 1) / 32,
 			TRSize:        32,
 			CTildeSize:    32,
+			Oid:           asn1.ObjectIdentifier{1, 3, 6, 1, 4, 1, 2, 267, 12, 8, 7},
 		},
 		{
 			Name:          "ML-DSA-44",
